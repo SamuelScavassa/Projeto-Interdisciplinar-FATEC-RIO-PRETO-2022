@@ -1,0 +1,81 @@
+@page "/produto/{id}"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+<PageTitle>Produto</PageTitle>
+@if (Pr == null)
+{
+  <h1>Produto não cadastrado</h1>
+
+}
+else
+{
+
+  <div class="container">
+    <br>
+    <br>
+    @foreach (var item in Pr)
+    {
+      <h1>Produto:</h1>
+      <h2>@item.Nome</h2>
+      <br><br>
+      <h2>R$: @item.Preco</h2>
+      <br><br>
+      <h4>@item.Descricao</h4>
+      Prd = item;
+    }
+  </div>
+  <br><br>
+
+}
+<div class="container">
+  @if (Login.Adm.Sa == true)
+  {
+    <button class="btn btn-primary" @onclick="alt">Alterar</button>
+    <br>
+    <br>
+    <button class="btn btn-primary" @onclick="dell">Deletar</button>
+    <br>
+    <br>
+
+  }
+  <button class="btn btn-primary" @onclick="addCarrinho">Adicionar ao carrinho</button>
+  <br>
+  <br>
+
+</div>
+
+
+@code {
+
+  [Parameter]
+  public string Id { get; set; }
+  public List<Carrinho.Produto> Pr { get; set; } = new List<Carrinho.Produto>();
+  public Carrinho.Produto Prd { get; set; } = new Carrinho.Produto();
+  protected override async Task OnInitializedAsync()
+  {
+    Pr = await Http.GetFromJsonAsync<List<Carrinho.Produto>>("/produto/" + Id);
+  }
+
+  public void alt()
+  {
+    Navigation.NavigateTo("/produto/up/" + Id);
+  }
+  public async void dell()
+  {
+    await Http.DeleteAsync("/produto/" + Id);
+    Navigation.NavigateTo("/listaProduto");
+  }
+  public void index()
+  {
+    Navigation.NavigateTo("/");
+  }
+
+  public async void addCarrinho()
+  {
+    Pages.Carrinho.Soma += Prd.Preco;
+    Pages.Carrinho.numItem += 1;
+    Pages.Carrinho.ListaCar.Add(Prd);
+    Navigation.NavigateTo("/produto/"+Id);
+  }
+
+}

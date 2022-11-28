@@ -1,0 +1,86 @@
+@page "/cadastro"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@using System.Text.Json
+<PageTitle>Cadastro</PageTitle>
+<br><br>
+<div class="row align-items-center">
+    <div class="col-md-10 mx-auto col-lg-3">
+        <form class="p-4 p-md-5 border rounded-3 bg-light">
+            <h2>Cadastro </h2>
+            <div class="form-group">
+                <label>Nome</label>
+                <input @bind="Name" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input @bind="Email" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input @bind="Password" class="form-control" type="password" />
+            </div>
+
+            <div class="form-group">
+                <label>Rua</label>
+                <input @bind="Rua" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>Numero</label>
+                <input @bind="Numero" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>CEP</label>
+                <input @bind="CEP" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>Cidade</label>
+                <input @bind="Cidade" class="form-control" />
+            </div>
+            <br />
+
+            <button type="button" class="w-100 btn btn-primary" @onclick="Save">Salvar</button>
+
+        </form>
+    </div>
+</div>
+
+
+@code {
+
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+    public string Rua { get; set; }
+    public int Numero { get; set; }
+    public int CEP { get; set; }
+    public string Cidade { get; set; }
+
+    private async void Save()
+    {
+
+        var cliente = new Login.Cliente
+        {
+            UserId = 0,
+            Name = Name,
+            Email = Email,
+            Password = Password,
+            Sa = false,
+            Rua = Rua,
+            Numero = Numero,
+            CEP = CEP,
+            Cidade = Cidade
+        };
+
+        await Http.PostAsJsonAsync<Login.Cliente>("/cliente", cliente);
+        Navigation.NavigateTo("/login");
+    }
+
+
+
+}

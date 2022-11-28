@@ -1,0 +1,154 @@
+@page "/user/up/{id}"
+@inject HttpClient Http 
+@inject NavigationManager Navigation
+<PageTitle>Alteração User</PageTitle>
+<br><br>
+<h2>Alteração Usuário</h2>
+
+@if(User == null)
+{
+
+}
+else{
+@foreach(var item in User)
+{
+<form>
+    <div class="form-group">
+        <label>Nome atual:</label>
+        <h2>@item.Name</h2>
+        <br>
+        <label>Novo Nome</label>
+        <input @bind="Nome" class="form-control"/>
+    </div>
+    <br><br>
+    <div class="form-group">
+        <label>Email atual:</label> 
+        <h2>@item.Email</h2>
+        <br>
+        <label>Novo Email</label>
+        <input @bind="Email" class="form-control"/>
+    </div>
+    <br><br>
+    <div class="form-group">Produto
+        <label>Senha atual:</label>
+        <h2>@item.Password</h2>
+        <br>
+        <label>Nova Senha</label>
+        <input @bind="Senha" class="form-control"/>
+    </div>
+    <br/>
+    <div class="form-group">
+        <label>Rua atual:</label> 
+        <h2>@item.Rua</h2>
+        <br>
+        <label>Novo Rua</label>
+        <input @bind="Rua" class="form-control"/>
+    </div>
+    <br><br>
+    <div class="form-group">Produto
+        <label>Numero atual:</label>
+        <h2>@item.Numero</h2>
+        <br>
+        <label>Novo Numero</label>
+        <input @bind="Numero" class="form-control"/>
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label>CEP atual:</label> 
+        <h2>@item.CEP</h2>
+        <br>
+        <label>Novo CEP</label>
+        <input @bind="CEP" class="form-control"/>
+    </div>
+    <br><br>
+    <div class="form-group">Produto
+        <label>Cidade atual:</label>
+        <h2>@item.Cidade</h2>
+        <br>
+        <label>Novo Cidade</label>
+        <input @bind="Cidade" class="form-control"/>
+    </div>
+    <br>
+    <button type="button" class="btn btn-primary" @onclick="Save">Salvar</button>
+</form>
+x = item;
+}
+}
+
+<br>
+<br>
+<br><br>
+<br><br>
+<br>
+@code {
+
+    [Parameter]
+    public string Id { get; set; } 
+    public string Nome { get; set; } 
+    public string Email { get; set; }
+    public string Senha { get; set; } 
+    public string Rua { get; set; } 
+    public int Numero { get; set; } 
+    public int CEP { get; set; }
+    public string Cidade { get; set; } 
+    public Login.Cliente x { get; set; } = new Login.Cliente();
+    public List<Login.Cliente> User { get; set; } = new List<Login.Cliente>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        User = await Http.GetFromJsonAsync<List<Login.Cliente>>("/cliente/"+Id);
+    }
+    public void index(){
+        Navigation.NavigateTo("/");
+    }
+
+    private async void Save()
+    {
+        if (Nome == null)
+        {
+            Nome = x.Name;
+        }
+        if (Email == null)
+        {
+            Email = x.Email;
+        }
+        if (Senha == null)
+        {
+            Senha = x.Password;
+        }
+        if (Rua == null)
+        {
+            Rua = x.Rua;
+        }
+        if (Numero == 0)
+        {
+            Numero = x.Numero;
+        }
+        if (CEP == 0)
+        {
+            CEP = x.CEP;
+        }
+        if (Cidade == null)
+        {
+            Cidade = x.Cidade;
+        }
+
+        var UP = new Login.Cliente {
+            UserId = x.UserId,
+            Name = Nome,
+            Email = Email,
+            Password = Senha,   
+            Sa = x.Sa,
+            Rua = Rua,
+            Numero = Numero,
+            CEP = CEP,
+            Cidade = Cidade
+        };
+
+        await Http.PutAsJsonAsync<Login.Cliente>("/cliente", UP);
+        Navigation.NavigateTo("/login", forceLoad:true);
+    }
+
+
+}

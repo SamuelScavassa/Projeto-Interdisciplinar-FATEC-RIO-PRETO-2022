@@ -1,0 +1,91 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = browser
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = true
+build_property.IncludeAllContentForSelfExtract = 
+build_property.RootNamespace = teste
+build_property.RootNamespace = teste
+build_property.ProjectDir = d:\FACULDADE\M.Cer-Automotiva-V3\front\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = d:\FACULDADE\M.Cer-Automotiva-V3\front
+build_property._RazorSourceGeneratorDebug = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/Cadastro.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkYXN0cm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/CadProduto.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkUHJvZHV0by5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/Carrinho.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FycmluaG8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/Compra.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcHJhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/Contato.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGF0by5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/ListaProduto.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdGFQcm9kdXRvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/ListaUsuarios.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdGFVc3Vhcmlvcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/Pesquisa.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGVzcXVpc2EucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/ProdutoInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHV0b0luZm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/SobreNos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU29icmVOb3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/UpdateProduto.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBkYXRlUHJvZHV0by5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/UpdateUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXBkYXRlVXNlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Pages/User.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/FACULDADE/M.Cer-Automotiva-V3/front/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-16ugt4imcp

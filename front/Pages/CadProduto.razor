@@ -1,0 +1,71 @@
+@page "/produto/cad"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+
+<PageTitle>Produto Create</PageTitle>
+<br><br>
+<div class="row align-items-center">
+        <div class="col-md-10 mx-auto col-lg-3">
+            <form class="p-4 p-md-5 border rounded-3 bg-light" enctype="multipart/form-data">
+                <h2> Create Produto  </h2>
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input @bind="Nome" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea class="form-control" rows="4" @bind="Descricao"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Preço</label>
+                    <input @bind="Preco" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Tag</label>
+                    <input @bind="Tag" class="form-control"/>
+                </div>
+
+                <br/>
+
+
+                <button type="button" class="w-100 btn btn-primary" @onclick="addProduto">Salvar</button>
+    
+            </form>
+        </div>
+    </div>
+
+
+
+@code {
+    public string Nome {get;set;}
+    public string Descricao {get;set;}
+    public double Preco {get;set;}
+    public string Tag { get; set; }
+    
+    protected async void addProduto()
+    {
+        var produto = new ProdutoCreateDTO {
+            ProdutoId = 0,
+            Nome = Nome,
+            Descricao = Descricao,
+            Preco = Preco,
+            Tag = Tag
+        };
+        
+        await Http.PostAsJsonAsync<ProdutoCreateDTO>("/produto/create", produto); 
+        Nav.NavigateTo("/listaProduto");
+    }
+
+    public class ProdutoCreateDTO
+    {
+        public int ProdutoId { get; set; } 
+        public string Nome { get; set; } 
+        public string Descricao { get; set; }
+        public double Preco { get; set; } 
+        public string Tag { get; set; }
+    }
+}

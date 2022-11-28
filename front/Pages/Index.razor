@@ -1,0 +1,55 @@
+﻿@page "/"
+@inject HttpClient Http
+<PageTitle>M.Cer Automotiva</PageTitle>
+<br><br>
+<div class="container">
+  <ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link" href="/listaProduto">Produtos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/sobre">Sobre Nós</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/contato">Contato</a>
+  </li>
+</ul>
+</div>
+<br><br>
+@if (Inx != null)
+{
+    <div class="container" style="align-items: center;">
+    <h1>PRODUTOS PRINCIPAIS</h1>
+    </div>
+    <br><br>
+    <div class="container">
+    <table class="table table-striped table-hover">
+    
+    @foreach (var item in Inx)
+    {
+        if(cont <= 5)
+        {    
+        <tr>
+            <td><h2><a href="/produto/@item.ProdutoId" style="text-decoration: none; color: black;">@item.Nome</a></h2></td>
+            <br><br>
+        </tr>
+        cont += 1;
+        } 
+    }
+
+    </table>
+    </div>
+}
+
+
+@code{
+
+    public int cont { get; set; } = 0;
+
+    public List<ListaProduto.Produto> Inx { get; set; } = new List<ListaProduto.Produto>();
+    protected override async Task OnInitializedAsync()
+     { 
+         Inx = await Http.GetFromJsonAsync<List<ListaProduto.Produto>>("/produto/lista");   
+     }
+    
+}

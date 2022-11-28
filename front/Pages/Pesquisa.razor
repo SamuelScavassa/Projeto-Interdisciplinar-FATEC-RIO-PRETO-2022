@@ -1,0 +1,106 @@
+@page "/busca/{par}"
+@page "/busca/{fil}/{par}"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+<PageTitle>Busca</PageTitle>
+<div class="container">
+    <br>
+    <br>
+
+    <div class="container">
+        <form class="form-control">
+            <div class="container" style="display: flex; flex-direction: row; justify-content:center;">
+                <input class="form-control" @bind="Busca" style="width: 60%;" placeholder="Pesquisar">
+                <button class="btn btn-info" @onclick="Procurar" style="margin: 5px;">BUSCAR</button>
+                <button class="btn btn-info" @onclick="AZ" style="margin: 5px;">A - Z</button>
+                <button class="btn btn-info" @onclick="Menor" style="margin: 5px;">Menor R$</button>
+                <button class="btn btn-info" @onclick="Maior" style="margin: 5px;">Maior R$</button>
+            </div>
+        </form>
+    </div>
+    <br><br><br><br>
+    <h1>Resultado</h1>
+    <br>
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Nome</th>
+            <th>Preco</th>
+            <th>Descrição</th>
+        </tr>
+
+        @foreach (var item in Resultado)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Preco</td>
+                <td>@item.Descricao</td>
+                <td><a href="/produto/@item.ProdutoId">COMPRAR</a></td>
+            </tr>
+        }
+    </table>
+</div>
+
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public string Par { get; set; }
+    [Parameter]
+    public string Fil { get; set; }
+    public string Busca { get; set; }
+
+    public static List<ListaProduto.Produto> Resultado { get; set; } = new List<ListaProduto.Produto>();
+
+    public static List<Pages.ListaProduto.Produto> Pr { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+        Pr = await Http.GetFromJsonAsync<List<Pages.ListaProduto.Produto>>("/produto/lista");
+        if (Par != null)
+        {
+            foreach (var x in Pr)
+            {
+                if (x.Tag.ToLower() == Par.ToLower() || x.Nome.ToLower() == Par.ToLower())
+                    Resultado.Add(x); 
+            }
+        }
+        if (Fil == "AZ")
+        {
+            Resultado = Resultado.OrderBy(x => x.Nome).ToList();
+        }
+        if (Fil == "menor")
+        {
+            Resultado = Resultado.OrderBy(x => x.Preco).ToList();
+        }
+        if (Fil == "maior")
+        {
+            Resultado = Resultado.OrderByDescending(x => x.Preco).ToList();   
+        }
+        
+    }
+    public void Procurar()
+    {
+        Navigation.NavigateTo("/busca/"+Busca);
+    }
+
+    public void AZ()
+    {
+        Navigation.NavigateTo("/busca/AZ/"+Busca);
+    }
+    public void Menor()
+    {
+        Navigation.NavigateTo("/busca/menor/"+Busca);
+    }
+
+    public void Maior()
+    {
+        Navigation.NavigateTo("/busca/maior/"+Busca);
+    }
+
+
+}

@@ -1,0 +1,62 @@
+@page "/listaUsuarios"
+@inject HttpClient Http
+@inject NavigationManager Nav
+<PageTitle>Users</PageTitle>
+<br><br>
+<h2>Lista Usuarios</h2>
+
+@if(Users != null )
+{
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Senha</th>    
+    </tr>
+    
+    @foreach(var user in Users)
+    {
+    <tr>
+        <td>@user.Name</td>
+        <td>@user.Email</td>
+        <td>@user.Password</td>   
+        <td>@user.Sa</td> 
+    </tr>
+    }
+</table>
+}
+
+else
+{
+    <h1>Sem Usuarios cadastrados</h1>
+    <p>Usuario indisponíveis</p>
+}
+
+<a class="btn btn-primary" href="cadastro">Adicionar</a>
+
+<br>
+<br>
+<button class="btn btn-primary" @onclick="index" >Index</button>
+
+@code {
+
+    public List<User> Users { get; set; } = new List<User>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Users = await Http.GetFromJsonAsync<List<User>>("user/list");
+    }
+    public void index(){
+        Nav.NavigateTo("/");
+    }
+
+    public class User
+    {
+        public int UserId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public bool Sa { get; set; }
+    }
+
+}

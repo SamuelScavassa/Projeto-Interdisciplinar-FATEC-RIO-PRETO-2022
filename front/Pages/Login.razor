@@ -1,0 +1,113 @@
+@page "/login"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<PageTitle>Login</PageTitle>
+
+<div class="container mt-4">
+
+    <div class="row align-items-center">
+        <div class="col-md-10 mx-auto col-lg-3"></div>
+        <form class="p-4 p-md-5  bg-light" style = "border-radius:5px 5px 0px 0px">
+            <h2>Login</h2>
+            <div class="form-group">
+                <input class="form-control" placeholder="Email" @bind="Email">
+                <label>Email</label>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Senha" @bind="Senha">
+                <label>Password</label>
+            </div>
+            <br>
+            <button class=" w-100 btn btn-lg btn-success" @onclick="login"> Entrar</button>
+        </form>
+        <div style = "background-color:#87ceeb; border-radius:0px 0px 5px 5px">
+                <p>Não tem uma conta crie aqui <a href="cadastro" style = "color:black">Crie aqui</a></p>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private string Email { get; set; }
+
+    private string Senha { get; set; }
+
+    public static string Nome { get; set; }
+
+    public List<Cliente> Clientes { get; set; } = new List<Cliente>();
+    public List<Funcionario> Funcionarios { get; set; } = new List<Funcionario>();
+
+    public static Cliente Cli { get; set; } = new Cliente();
+    public static Funcionario Adm { get; set; } = new Funcionario();
+    public static User Usuario { get; set; } = new User();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Clientes = await Http.GetFromJsonAsync<List<Cliente>>("/cliente/list");
+        Funcionarios = await Http.GetFromJsonAsync<List<Funcionario>>("/funcionario/list");
+    }
+
+    public async void login()
+    {
+        foreach (var x in Clientes)
+        {
+            if (x.Email == Email && x.Password == Senha)
+            {
+                Cli = x;
+                Nome = x.Name;
+                Usuario.UserId = x.UserId;
+                Usuario.Name = x.Name;
+                Usuario.Email = x.Email;
+                Usuario.Password = x.Password;
+                Usuario.Sa = x.Sa;
+                Navigation.NavigateTo("/user");
+            }
+        }
+        foreach (var x in Funcionarios)
+        {
+            if (x.Email == Email && x.Password == Senha)
+            {
+                Adm = x;
+                Nome = x.Name;
+                Usuario.UserId = x.UserId;
+                Usuario.Name = x.Name;
+                Usuario.Email = x.Email;
+                Usuario.Password = x.Password;
+                Usuario.Sa = x.Sa;
+            }
+        }
+        if (Nome == null)
+        {
+            Navigation.NavigateTo("/cadastro");
+        }
+        Navigation.NavigateTo("/user");
+        
+
+    }
+
+    public class User
+    {
+        public int UserId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public bool Sa { get; set; }
+    }
+
+    public class Funcionario : User
+    {
+        public double Salario { get; set; }
+    }
+
+    public class Cliente : User
+    {
+
+        public string Rua { get; set; }
+        public int Numero { get; set; }
+        public int CEP { get; set; }
+        public string Cidade { get; set; }
+
+    }
+}

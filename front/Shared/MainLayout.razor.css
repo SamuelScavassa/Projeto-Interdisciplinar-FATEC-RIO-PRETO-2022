@@ -1,0 +1,291 @@
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.sidebar {
+  background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #d6d5d5;
+  justify-content: flex-end;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+}
+
+  .top-row ::deep a, .top-row ::deep .btn-link {
+      white-space: nowrap;
+      margin-left: 1.5rem;
+      text-decoration: none;
+  }
+
+  .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
+      text-decoration: underline;
+  }
+
+  .top-row ::deep a:first-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+
+@media (max-width: 640.98px) {
+  .top-row:not(.auth) {
+      display: none;
+  }
+
+  .top-row.auth {
+      justify-content: space-between;
+  }
+
+  .top-row ::deep a, .top-row ::deep .btn-link {
+      margin-left: 0;
+  }
+}
+
+@media (min-width: 641px) {
+  .page {
+      flex-direction: row;
+  }
+
+  .sidebar {
+      width: 250px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+  }
+
+  .top-row {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+  }
+
+  .top-row.auth ::deep a:first-child {
+      flex: 1;
+      text-align: right;
+      width: 0;
+  }
+
+  .top-row, article {
+      padding-left: 2rem !important;
+      padding-right: 1.5rem !important;
+  }
+  /* TAGS */
+
+body {
+background-color: #DEDEDE;
+padding: 0%;
+margin: 0%;
+}
+
+a {
+text-decoration: none;
+}
+
+.cabecalho {
+display: flex;
+height: 284px;
+background-color: #DDD856;
+flex-direction: column;
+
+}
+
+.menu a:hover {
+font-family: 'Arial Black';
+font-weight: 800;
+font-size: 24px;
+line-height: 29px;
+color: #DDD856;
+padding: 1px;
+background-color: #2E3192;
+border-radius: 5px;
+}
+
+.topo {
+display: flex;
+align-items: flex-start;
+padding-top: 50px;
+justify-content: space-between;
+}
+
+.logo {
+height: 5em;
+padding: 20px;
+}
+
+.menu {
+font-family: 'Arial Black';
+font-weight: 800;
+font-size: 24px;
+line-height: 29px;
+color: #2E3192;
+padding: 20px;
+}
+
+.sub_menu {
+display: flex;
+justify-content: center;
+padding-top: 2.5em;
+}
+
+.sub_menu a:link {
+padding: 1.5em;
+font-family: 'Arial';
+font-weight: 100;
+font-size: 20px;
+text-align: center;
+color: #2E3192;
+}
+
+.sub_menu a:hover {
+padding: 1.5em;
+font-family: 'Arial';
+font-weight: 100;
+font-size: 20px;
+text-align: center;
+color: white;
+
+}
+
+.itemloja {
+width: 150px;
+height: 150px;
+}
+
+.rodape {
+height: 75px;
+background-color: #2E3192;
+color: white;
+position: absolute;
+bottom: 0;
+width: 100%;
+}
+
+.texto_rodape {
+display: flex;
+justify-content: center;
+padding-top: 12px;
+font-size: 15px;
+}
+
+
+/*a*/
+.roll {
+height: 460px;
+overflow-y: scroll;
+overflow-x: hidden;
+}
+}
+/* TAGS */
+
+body {
+  background-color: #DEDEDE;
+  padding: 0%;
+  margin: 0%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.cabecalho {
+  display: flex;
+  height: 284px;
+  background-color: #DDD856;
+  flex-direction: column;
+
+}
+
+.menu a:hover {
+  font-family: 'Arial Black';
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 29px;
+  color: #DDD856;
+  padding: 1px;
+  background-color: #2E3192;
+  border-radius: 5px;
+}
+
+.topo {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 50px;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 5em;
+  padding: 20px;
+}
+
+.menu {
+  font-family: 'Arial Black';
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 29px;
+  color: #2E3192;
+  padding: 20px;
+}
+
+.sub_menu {
+  display: flex;
+  justify-content: center;
+  padding-top: 2.5em;
+}
+
+.sub_menu a:link {
+  padding: 1.5em;
+  font-family: 'Arial';
+  font-weight: 100;
+  font-size: 20px;
+  text-align: center;
+  color: #2E3192;
+}
+
+.sub_menu a:hover {
+  padding: 1.5em;
+  font-family: 'Arial';
+  font-weight: 100;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+
+}
+
+.itemloja {
+  width: 150px;
+  height: 150px;
+}
+
+.rodape {
+  height: 75px;
+  background-color: #2E3192;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.texto_rodape {
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+  font-size: 15px;
+}
+
+
+/*a*/
+.roll {
+  height: 460px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

@@ -1,0 +1,100 @@
+@page "/produto/up/{id}"
+@inject HttpClient Http 
+@inject NavigationManager Navigation
+<PageTitle>Produto Update</PageTitle>
+<br><br>
+<h2>Alteração de produto</h2>
+@if(Produto == null)
+{
+    <p>Não encontrado</p>
+}
+else{
+@foreach(var item in Produto)
+{
+<form>
+    <div class="form-group">
+        <label>Nome</label>
+        <h2>@item.Nome</h2>
+        <input @bind="Nome" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Descrição</label>
+        <h2>@item.Descricao</h2>
+        <input @bind="Descricao" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Preço</label>
+        <h2>@item.Preco</h2>
+        <input @bind="Preco" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Tag</label>
+        <h2>@item.Tag</h2>
+        <input @bind="Tag" class="form-control"/>
+    </div>
+    <br/>
+    <button type="button" class="btn btn-primary" @onclick="Save">Salvar</button>   
+</form>
+x = item;
+}
+}
+<br>
+<br>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; } 
+    public string Nome { get; set; } 
+    public string Descricao { get; set; }
+    public double Preco { get; set; } 
+    public string Tag { get; set; }
+    public ProdutoUpdateDTO x = new ProdutoUpdateDTO();
+    public List<ProdutoUpdateDTO> Produto { get; set; } = new List<ProdutoUpdateDTO>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Produto = await Http.GetFromJsonAsync<List<ProdutoUpdateDTO>>("/produto/"+Id);
+    }
+    
+
+    private async void Save()
+    {
+        if (Nome == null)
+        {
+            Nome = x.Nome;
+        }
+        if (Descricao == null)
+        {
+            Descricao = x.Descricao;
+        }
+        if (Preco == 0)
+        {
+            Preco = x.Preco;
+        }
+        if (Tag == null )
+        {
+            Tag = x.Tag;
+        }
+        var UP = new ProdutoUpdateDTO {
+            ProdutoId = int.Parse(Id),
+            Nome = Nome,
+            Descricao = Descricao,
+            Preco = Preco,
+            Tag = Tag   
+        };
+
+        await Http.PutAsJsonAsync<ProdutoUpdateDTO>("/produto", UP);
+        Navigation.NavigateTo("produto/"+Id);
+    }
+
+    public class ProdutoUpdateDTO
+    {
+        public int ProdutoId { get; set; }
+        public string Nome { get; set; } 
+        public string Descricao { get; set; }
+        public double Preco { get; set; }
+        public string Tag { get; set; }
+    }
+
+}

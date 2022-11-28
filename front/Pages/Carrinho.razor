@@ -1,0 +1,126 @@
+@page "/carrinho"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+
+<PageTitle>Carrinho</PageTitle>
+<!-- Navbar End -->
+<br><br>
+<div class="container">
+  <h2 class="text-center">Carrinho de compras</h2>
+  <hr class="star-dark mb-5">
+  <!--Item carrinho-->
+
+  <ul>
+    <li>
+      <h5>
+        <span>
+          <h2>Produtos</h2>
+        </span>
+        <br><br>
+        @foreach (var item in ListaCar)
+
+        {
+          <table>
+            <tr>
+              <td>
+                <span>
+                  Produto: @item.Nome
+                </span>
+                <span>
+                  Preço: @item.Preco
+                </span>
+              </td>
+              <td>
+                <button class="" @onclick="dele">🗑️</button>
+              </td>
+            </tr>
+          </table>
+          Pr = item;
+        }
+      </h5>
+    </li>
+
+  </ul>
+</div>
+
+<hr class="star-dark">
+
+<!---->
+<hr class="star-dark mb-5">
+<span>
+  <h3 class="text-center">Subtotal: R$ @Soma </h3>
+</span>
+<br>
+<div class="container" style="display: flex; justify-content: center;">
+<button class="btn btn-primary" @onclick="comp">Comprar</button>
+</div>
+
+@code {
+
+  public static List<Produto> ListaCar { get; set; } = new List<Produto>();
+
+  public static double Soma { get; set; } = 0;
+
+  public static int numItem { get; set; } = 0;
+
+  public Produto Pr { get; set; }
+
+  public static Car CarrinhoUser { get; set;}
+
+
+
+
+  public async void comp()
+
+  {
+    
+    CarrinhoUser = new Car {
+        CarrinhoId = 0,
+        Produtos = ListaCar,
+        Cliente = Login.Cli
+    };
+    ListaCar = new List<Produto>();
+    numItem = 0;
+    Nav.NavigateTo("/compra");
+
+  }
+
+  public  void dele()
+
+  {
+    ListaCar.Remove(Pr);
+
+    Soma = Soma - Pr.Preco;
+
+    Pages.Carrinho.numItem -= 1;
+
+
+    Nav.NavigateTo("/carrinho");
+
+  }
+
+
+
+  public class Car
+
+  {
+
+    public int CarrinhoId { get; set; }
+
+    public List<Produto> Produtos { get; set; }
+
+    public Pages.Login.Cliente Cliente { get; set; }
+
+  }
+
+  public class Produto
+{
+    public int ProdutoId { get; set; }
+    public string Nome { get; set; }
+    public string Descricao { get; set; }
+    public double Preco { get; set; }
+    public string Tag { get; set; }
+}  
+
+}

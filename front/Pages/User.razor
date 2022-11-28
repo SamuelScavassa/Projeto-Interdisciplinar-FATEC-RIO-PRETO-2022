@@ -1,0 +1,280 @@
+@page "/user"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+<br><br>
+<PageTitle>User</PageTitle>
+
+
+<h1 class="container">Tela de Usuário</h1>
+<br>
+<div class="container">
+  <table>
+    <tr>
+      <td>
+        <br>
+        <h2>Nome: @Login.Usuario.Name</h2>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <br>
+        <h2>Email: @Pages.Login.Usuario.Email</h2>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <br>
+        <h2>Senha: @Pages.Login.Usuario.Password</h2>
+      </td>
+    </tr>
+    @if (Login.Adm.Sa == true)
+
+    {
+      <tr>
+        <td>
+          <br>
+          <h2>Salário: @Login.Adm.Salario</h2>
+        </td>
+      </tr>
+
+    }
+
+    else
+    {
+      <tr>
+        <td>
+          <br>
+          <h2>Rua: @Login.Cli.Rua</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <br>
+          <h2>Número: @Login.Cli.Numero</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <br>
+          <h2>CEP: @Login.Cli.CEP</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <br>
+          <h2>Cidade: @Login.Cli.Cidade</h2>
+        </td>
+      </tr>
+
+    }
+  </table>
+</div>
+<br><br><br>
+
+@if (Login.Adm.Sa == true)
+{
+
+  <div class="container">
+    <h2>Menu Adiministrador</h2>
+    <br><br>
+    <table class="table-primary">
+      <tbody>
+        <tr>
+          <td>
+            <button class="btn btn-primary" @onclick="cadProduto">Cadastro Produto</button>
+            <br>
+            <br>
+          </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td>
+            <button class="btn btn-primary" @onclick="cadUser">Cadastro User</button>
+            <br>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td scope="row">
+            <button class="btn btn-primary" @onclick="listProduto">Lista Produto</button>
+            <br>
+            <br>
+          </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td>
+            <button class="btn btn-primary" @onclick="listUser">Lista User</button>
+            <br>
+            <br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+}
+
+else
+{
+  <div class="container">
+    <h2>Menu Usúario</h2>
+    <br><br>
+    <table class="table-primary">
+      <tbody>
+        <tr>
+          <td>
+            <button class="btn btn-primary" @onclick="cadUser">Cadastro User</button>
+            <br>
+            <br>
+          </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td>
+            <button class="btn btn-primary" @onclick="listProduto">Lista Produto</button>
+            <br>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button class="btn btn-primary" @onclick="alt">Alterar Usuário</button>
+            <br>
+            <br>
+            </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td>
+            <button class="btn btn-primary" @onclick="dell">Deletar Usuário</button>
+            <br>
+            <br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+}
+<br><br><br>
+<br><br><br>
+<br><br><br>
+
+@code {
+
+  public void alt()
+
+  {
+
+    Navigation.NavigateTo("/user/up/" + Pages.Login.Cli.UserId);
+
+  }
+
+  public async void dell()
+
+  {
+
+    if (Login.Usuario.Sa == false)
+
+      await Http.DeleteAsync("/cliente/" + Login.Usuario.UserId);
+
+    if (Login.Usuario.Sa == true)
+
+      await Http.DeleteAsync("/funcionario/" + Login.Usuario.UserId);
+
+
+
+    Navigation.NavigateTo($"/", forceLoad: true);
+
+  }
+
+  public void index()
+
+  {
+    Navigation.NavigateTo($"/");
+
+  }
+
+
+
+  public void cadUser()
+
+  {
+
+    Navigation.NavigateTo("/cadastro");
+
+  }
+
+
+
+  public void cadProduto()
+
+  {
+
+    Navigation.NavigateTo("/produto/cad");
+
+  }
+
+
+
+  public void listUser()
+
+  {
+
+    Navigation.NavigateTo("/listaUsuarios");
+
+  }
+
+
+
+  public void listProduto()
+
+  {
+
+    Navigation.NavigateTo("/listaProduto");
+
+  }
+
+
+
+  public void login()
+
+  {
+
+    Navigation.NavigateTo("/login");
+
+  }
+
+
+
+
+
+
+
+  public class Usr
+
+  {
+
+    public int UserId { get; set; }
+
+    public string Name { get; set; }
+
+    public string Email { get; set; }
+
+    public string Password { get; set; }
+
+    public bool Sa { get; set; }
+
+  }
+
+
+}

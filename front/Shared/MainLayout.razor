@@ -1,0 +1,70 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager Nav
+
+<header>
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="img/logo.png"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <form>
+              <div class="input-group">
+                <input class="form-control" placeholder="Procurar" @bind="itemPesq">
+                <button @onclick="pesq">🔎</button>
+              </div>
+            </form>
+          </li>
+          @if (Pages.Login.Nome != null)
+          {
+            <li class="nav-item">
+              <a href="/user" class="nav-item nav-link">@Pages.Login.Nome</a>
+            </li>
+          }
+          else
+          {
+            <li class="nav-item">
+              <a href="/login" class="nav-item nav-link">Login</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="/cadastro" class="nav-item nav-link">Registro</a>
+            </li>
+          }
+        </ul>
+      </div>
+      <div>
+        <a href="/carrinho" class="btn border">
+          <i class="fas fa-shopping-cart text-primary">🛒</i>
+          <span class="badge">@Pages.Carrinho.numItem</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- Navbar End -->
+
+<article class="content px-4">
+  @Body
+</article>
+
+@code {
+
+  public static string itemPesq { get; set; } 
+
+  public void pesq()
+  {
+    if (itemPesq == null)
+    {
+      Nav.NavigateTo("busca/x");
+    }
+    else{
+      Nav.NavigateTo("busca/"+itemPesq);
+    } 
+  }
+}

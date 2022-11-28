@@ -1,0 +1,62 @@
+@page "/listaProduto"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+<PageTitle>Produtos</PageTitle>
+@if (Pr != null)
+{
+
+
+    <div class="container">
+        <br><br>
+        <h2>Lista Produto</h2>
+        <br>
+        <br>
+
+        <table class="table">
+            <tr>
+                <th>
+                    <h2>Nome</h2>
+                </th>
+                <th>
+                    <h2>Preco</h2>
+                </th>
+            </tr>
+            <br>
+            @foreach (var item in Pr)
+            {
+                <tr>
+                    <td><a href="/produto/@item.ProdutoId" style="text-decoration: none; color: black;">@item.Nome</a></td>
+                    <td>@item.Preco</td>
+                </tr>
+            }
+        </table>
+
+        @if (Login.Usuario.Sa == true)
+        {
+            <a class="btn btn-primary" href="/produto/cad">Adicionar Produto</a>
+            <br>
+            <br>
+        }
+    </div>
+
+}
+@code {
+
+    public List<Produto> Pr { get; set; } = new List<Produto>();
+    protected override async Task OnInitializedAsync()
+    {
+        Pr = await Http.GetFromJsonAsync<List<Produto>>("/produto/lista");
+    }
+
+
+    public class Produto
+    {
+        public int ProdutoId { get; set; }
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
+        public double Preco { get; set; }
+        public string Tag { get; set; }
+    }
+
+}

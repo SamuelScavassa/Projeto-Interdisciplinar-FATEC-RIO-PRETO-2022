@@ -1,0 +1,96 @@
+@page "/compra"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+<PageTitle>Compra</PageTitle>
+
+@if (CarrinhoUser != null)
+{
+
+<br><br>
+    <div class="container">
+        <h1>Endereço</h1>
+
+        <h2>Rua: @CarrinhoUser.Cliente.Rua, @CarrinhoUser.Cliente.Numero .
+            @CarrinhoUser.Cliente.Cidade - @CarrinhoUser.Cliente.CEP</h2>
+
+        <br><br>
+
+        <table>
+
+            <th><h1>Itens</h1></th>
+            @foreach (var item in CarrinhoUser.Produtos)
+            {
+                <tr>
+                    <td><h3>@item.Nome</h3></td>
+                </tr>
+                
+            }
+        </table>
+<br><br> 
+        <h1>Total</h1>
+        <h3>R$ @Carrinho.Soma</h3>
+
+    </div>
+<br><br> 
+
+<div class="container" style="display: flex; flex-direction: column; justify-content: center;">
+
+    <div>
+    <img src="img/pix.jpg">
+    </div>
+    <br>
+    <h3>Pague via PIX ☝️</h3>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+
+<br>
+<br>
+<h4>Obrigado pela preferência! 😊</h4>
+<br>
+<br>
+
+}
+
+@code {
+    public Carrinho.Car CarrinhoUser { get; set; } = Carrinho.CarrinhoUser;
+    public static Pedido Ped { get; set; } = new Pedido();
+    public string Nome { get; set; } 
+    public static string str { get; set; } 
+    
+    protected override async Task OnInitializedAsync()
+    { 
+        lista();
+        var x = new Pedido {
+            PedidoId = 0,
+            Data = DateTime.Today,
+            Cliente = Login.Cli.Name,
+            Produtos = str,
+            Total = Carrinho.Soma
+        };
+        await Http.PostAsJsonAsync<Pedido>("/pedido", x);
+        await Http.PostAsJsonAsync<Carrinho.Car>("/carrinho", CarrinhoUser);
+    }
+
+    public void lista(){
+        List<string> list = new List<string>();
+        foreach (var item in CarrinhoUser.Produtos)
+        {   
+            list.Add(item.Nome);
+        }
+        char delim = ',';
+        str = String.Join(delim, list);
+    }
+    public class Pedido
+    {
+    public int PedidoId { get; set; }
+    public DateTime Data { get; set; }
+    public string Cliente { get; set; }
+    public string Produtos { get; set; }
+    public double Total { get; set; }
+    }
+}
