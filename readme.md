@@ -57,7 +57,7 @@ Para realizar essa implementação, foram escolhidas as tecnologias Dotnet Frame
 
 ## Este é o resultado final de desenvolvimento. 
 
-## Desevvolvedores:
+## Desenvolvedores:
 
 ### Samuel Melegatti Scavassa
 ### Thiago de Carvalho Regis
